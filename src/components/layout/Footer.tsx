@@ -1,0 +1,108 @@
+"use client";
+
+import { useState } from "react";
+import { Music2 } from "lucide-react";
+import { CONTACT, FOOTER_ACADEMY, FOOTER_EVENTS, INFO_DIALOGS } from "@/lib/content";
+import { Logo } from "@/components/ui/Logo";
+import { FacebookIcon, InstagramIcon } from "@/components/ui/icons";
+import { InfoDialog } from "@/components/ui/Modal";
+
+type DialogKey = keyof typeof INFO_DIALOGS;
+
+const socialCls =
+  "flex h-11 w-11 items-center justify-center rounded-full border border-copper/30 text-copper-light transition-colors hover:border-copper hover:text-ivory";
+const linkCls = "text-[13.5px] text-ivory/60 transition-colors hover:text-ivory";
+const legalCls = "text-[11.5px] uppercase tracking-[0.16em] text-ivory/45 transition-colors hover:text-copper-light";
+
+export function Footer() {
+  const [dialog, setDialog] = useState<DialogKey | null>(null);
+
+  return (
+    <footer className="relative overflow-hidden border-t border-copper/30 bg-signature pb-28 pt-16 lg:pb-14">
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <Logo size={52} />
+            <p className="mt-5 font-script text-[26px] text-copper-light">Every detail, a signature.</p>
+            <p className="mt-4 max-w-xs text-[14px] leading-relaxed text-ivory/55">
+              Luxury event planning and design, plus event planning classes, serving {CONTACT.area}.
+            </p>
+            <div className="mt-6 flex gap-3">
+              <a href={CONTACT.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className={socialCls}>
+                <InstagramIcon className="h-4 w-4" />
+              </a>
+              <button type="button" aria-label="Facebook" className={socialCls} onClick={() => setDialog("social")}>
+                <FacebookIcon className="h-4 w-4" />
+              </button>
+              <button type="button" aria-label="TikTok" className={socialCls} onClick={() => setDialog("social")}>
+                <Music2 className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+
+          <div className="md:col-span-2">
+            <p className="label-caps text-copper">Events</p>
+            <ul className="mt-4 space-y-2.5">
+              {FOOTER_EVENTS.map((t) => (
+                <li key={t}>
+                  <a href="#events" className={linkCls}>
+                    {t}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-3">
+            <p className="label-caps text-copper">Academy</p>
+            <ul className="mt-4 space-y-2.5">
+              {FOOTER_ACADEMY.map((t) => (
+                <li key={t}>
+                  <a href="#inquire" className={linkCls}>
+                    {t}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-3">
+            <p className="label-caps text-copper">Contact</p>
+            <ul className="mt-4 space-y-2.5 text-[13.5px] text-ivory/60">
+              <li>
+                <a href={CONTACT.phone1Href} className="transition-colors hover:text-ivory">
+                  {CONTACT.phone1}
+                </a>
+              </li>
+              <li>
+                <a href={CONTACT.phone2Href} className="transition-colors hover:text-ivory">
+                  {CONTACT.phone2}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${CONTACT.email}`} className="transition-colors hover:text-ivory">
+                  {CONTACT.email}
+                </a>
+              </li>
+              <li className="text-ivory/45">{CONTACT.area}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-14 flex flex-col gap-4 border-t border-copper/15 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-[11.5px] uppercase tracking-[0.16em] text-ivory/35">© 2026 The Signature Affair, LLC</p>
+          <div className="flex gap-6">
+            <button type="button" className={legalCls} onClick={() => setDialog("privacy")}>
+              Privacy
+            </button>
+            <button type="button" className={legalCls} onClick={() => setDialog("terms")}>
+              Terms
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {dialog && <InfoDialog {...INFO_DIALOGS[dialog]} onClose={() => setDialog(null)} />}
+    </footer>
+  );
+}
