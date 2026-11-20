@@ -106,3 +106,8 @@ Hover effects were checked against the reference CSS and use the same classes an
    - The Instagram handle is `@thesignaturesffairga` (possible typo).
    - The testimonials are explicitly labelled as samples.
    - The Privacy and Terms text says the policies are "being finalized".
+
+## 7. Deployment
+- Live URL: https://signature-affair.vercel.app (public).
+- The deployment-specific URLs (`*-hassandanyal18-3432s-projects.vercel.app`) are behind Vercel's default Deployment Protection and require a Vercel login.
+- The 26-test functional suite was re-run against the live URL: **26 / 26 pass**, with no console errors and no failed requests.
