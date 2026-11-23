@@ -80,7 +80,8 @@ export function Portfolio() {
           <a
             href={CONTACT.instagram}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
+            aria-label={`See more on Instagram ${CONTACT.instagramHandle} (opens in a new tab)`}
             className="inline-flex items-center gap-2.5 text-[11px] uppercase tracking-[0.2em] text-copper-deep transition-colors hover:text-ink"
           >
             <InstagramIcon className="h-4 w-4" />

@@ -26,9 +26,14 @@ export function Header() {
     <>
       <header className="fixed inset-x-0 top-0 z-50">
         <div className="border-b border-copper/30 bg-[rgba(13,13,15,0.55)] backdrop-blur-2xl">
-          <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
+          <div className="mx-auto flex h-[80px] max-w-7xl items-center justify-between gap-6 px-5 sm:h-[88px] sm:px-8">
             <a href="#top" className="shrink-0" aria-label="The Signature Affair home">
-              <Logo size={44} />
+              <Logo
+                sizeCls="h-[56px] w-[56px] sm:h-[60px] sm:w-[60px]"
+                nameCls="text-[19px] sm:text-[22px] xl:text-[20px]"
+                tagCls="text-[9.5px] sm:text-[11px] xl:text-[10px]"
+                priority
+              />
             </a>
 
             <nav className="hidden items-center gap-7 xl:flex" aria-label="Main">
@@ -36,7 +41,7 @@ export function Header() {
                 <a
                   key={l.href}
                   href={l.href}
-                  className="group relative text-[13.5px] tracking-[0.1em] text-ivory/80 transition-colors hover:text-ivory"
+                  className="group relative whitespace-nowrap text-[13.5px] tracking-[0.1em] text-ivory/80 transition-colors hover:text-ivory"
                 >
                   {l.label}
                   <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-copper transition-all duration-500 group-hover:w-full" />
@@ -44,7 +49,7 @@ export function Header() {
               ))}
             </nav>
 
-            <div className="hidden items-center gap-3 lg:flex">
+            <div className="hidden shrink-0 items-center gap-3 whitespace-nowrap lg:flex">
               <a
                 href="#inquire"
                 className="btn-shine inline-flex h-11 items-center rounded-full bg-copper px-6 text-[12px] uppercase tracking-[0.18em] text-signature transition-transform duration-300 hover:-translate-y-0.5"
@@ -90,7 +95,7 @@ export function Header() {
         >
           <div className="flex items-center justify-between">
             <span className="inline-flex items-center gap-3">
-              <Monogram size={40} />
+              <Monogram sizeCls="h-[54px] w-[54px]" />
             </span>
             <button
               type="button"

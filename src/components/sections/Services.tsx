@@ -1,5 +1,5 @@
-import { ArrowRight } from "lucide-react";
-import { IMG } from "@/lib/content";
+import { ArrowRight, Plane } from "lucide-react";
+import { CONTACT, IMG } from "@/lib/content";
 import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -61,9 +61,15 @@ export function Services() {
               Signature <span className="text-copper-grad italic">services.</span>
             </h2>
           </div>
-          <p className="max-w-sm text-[15.5px] leading-relaxed text-ivory/60">
-            Luxury event planning and design across Georgia, from intimate showers to full corporate galas.
-          </p>
+          <div className="max-w-sm">
+            <p className="text-[15.5px] leading-relaxed text-ivory/60">
+              Luxury event planning and design serving {CONTACT.area}, from intimate showers to full corporate galas.
+            </p>
+            <p className="mt-4 inline-flex items-start gap-2 rounded-2xl border border-copper/30 bg-copper/10 px-4 py-2.5 text-[12.5px] leading-snug text-copper-light">
+              <Plane className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+              {CONTACT.travel}
+            </p>
+          </div>
         </Reveal>
 
         <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-12">

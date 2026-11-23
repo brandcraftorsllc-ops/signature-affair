@@ -8,6 +8,7 @@ import { Portfolio } from "@/components/sections/Portfolio";
 import { Academy } from "@/components/sections/Academy";
 import { About } from "@/components/sections/About";
 import { Testimonials } from "@/components/sections/Testimonials";
+import { SignatureStatement } from "@/components/sections/SignatureStatement";
 import { Inquire } from "@/components/sections/Inquire";
 
 export default function HomePage() {
@@ -21,6 +22,7 @@ export default function HomePage() {
         <Portfolio />
         <Academy />
         <About />
+        <SignatureStatement />
         <Testimonials />
         <Inquire />
       </main>

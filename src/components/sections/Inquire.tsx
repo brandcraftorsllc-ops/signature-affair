@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Plane } from "lucide-react";
 import { CONTACT, IMG } from "@/lib/content";
 import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/ui/Reveal";
@@ -72,19 +73,25 @@ function PreviewNotice() {
   return (
     <p role="status" className="text-center text-[12.5px] leading-relaxed text-copper-light">
       Thank you. This preview isn&apos;t connected to an inbox yet, so nothing was sent. Please email {CONTACT.email} or call{" "}
-      {CONTACT.phone1}.
+      {CONTACT.phone}.
     </p>
   );
 }
 
 function SubmitButton({ label }: { label: string }) {
   return (
-    <button
-      type="submit"
-      className="btn-shine inline-flex min-h-[52px] w-full items-center justify-center rounded-full bg-copper px-8 text-[11.5px] uppercase tracking-[0.2em] text-signature transition-transform duration-300 hover:-translate-y-0.5 disabled:opacity-60"
-    >
-      <span className="relative z-10">{label}</span>
-    </button>
+    <div>
+      <button
+        type="submit"
+        className="btn-shine inline-flex min-h-[52px] w-full items-center justify-center rounded-full bg-copper px-8 text-[11.5px] uppercase tracking-[0.2em] text-signature transition-transform duration-300 hover:-translate-y-0.5 disabled:opacity-60"
+      >
+        <span className="relative z-10">{label}</span>
+      </button>
+      <p className="mt-3 flex items-center justify-center gap-2 text-center text-[12.5px] leading-snug text-copper-light/85">
+        <Plane className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+        {CONTACT.travel}
+      </p>
+    </div>
   );
 }
 
@@ -126,7 +133,7 @@ function EventForm() {
           <input id="ev-guests" name="guests" type="number" min={1} placeholder="e.g. 120" className={fieldCls} />
         </Field>
         <Field id="ev-venue" label="Venue (if booked)">
-          <input id="ev-venue" name="venue" placeholder="Venue name" className={fieldCls} />
+          <input id="ev-venue" name="venue" placeholder="Venue, or city, state, or country" className={fieldCls} />
         </Field>
       </div>
 
@@ -278,8 +285,9 @@ export function Inquire() {
 
         <Reveal delay={200} className="mt-8 text-center">
           <p className="label-caps text-copper/70">
-            {CONTACT.phone1} · {CONTACT.phone2} · {CONTACT.email}
+            {CONTACT.phone} · {CONTACT.email}
           </p>
+          <p className="label-caps mt-2 text-ivory/45">Serving {CONTACT.area}</p>
         </Reveal>
       </div>
     </section>

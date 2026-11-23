@@ -21,7 +21,7 @@ export function About() {
               <div className="h-[440px] w-full sm:h-[520px]">
                 <Photo
                   src={IMG.dee}
-                  alt="Dee Lyles, founder and lead designer of The Signature Affair"
+                  alt="Dee, founder and lead designer of The Signature Affair"
                   sizes="(min-width: 640px) 384px, 100vw"
                 />
               </div>
@@ -36,7 +36,7 @@ export function About() {
           <div className="glass-dark rounded-[28px] p-7 sm:p-11">
             <p className="font-script text-[28px] text-copper-light">hello, I&apos;m</p>
             <h2 className="mt-1 font-display text-[clamp(2.2rem,4.4vw,3.4rem)] font-medium leading-[1.05] text-ivory">
-              Dee Lyles
+              Dee
             </h2>
             <p className="mt-6 text-[16px] leading-relaxed text-ivory/75">
               For more than 15 years I&apos;ve designed weddings, corporate events and celebrations, over 500 experiences and

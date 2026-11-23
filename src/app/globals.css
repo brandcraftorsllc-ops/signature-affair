@@ -117,6 +117,20 @@
   }
 }
 
+/* Signature statement medallion */
+.saf-ring-glow {
+  filter: drop-shadow(0 0 5px rgba(232, 179, 138, 0.35));
+}
+.saf-twinkle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: saf-twinkle 3.8s ease-in-out infinite both;
+}
+@keyframes saf-twinkle {
+  0%, to { opacity: 0.2; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
 @keyframes saf-rise {
   0% { opacity: 0; transform: translateY(22px); }
   to { opacity: 1; transform: translateY(0); }
@@ -140,7 +154,8 @@
   .saf-hero-img,
   .saf-candle,
   .saf-rise,
-  .saf-dust span {
+  .saf-dust span,
+  .saf-twinkle {
     animation: none !important;
   }
 }

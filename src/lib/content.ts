@@ -16,14 +16,14 @@ export const IMG = {
 } as const;
 
 export const CONTACT = {
-  phone1: "(678) 913-6712",
-  phone1Href: "tel:+6789136712",
-  phone2: "(762) 235-4905",
-  phone2Href: "tel:+7622354905",
+  phone: "(762) 235-4905",
+  phoneHref: "tel:+17622354905",
   email: "Hello@thesignatureaffairga.com",
-  area: "Georgia and surrounding areas",
+  area: "Georgia & Surrounding Areas",
+  travel: "Available for travel. Destination and international events welcome.",
   instagram: "https://www.instagram.com/thesignaturesffairga",
   instagramHandle: "@thesignaturesffairga",
+  tiktok: "https://www.tiktok.com/@thesignatureaffair",
 };
 
 export const NAV_LINKS = [
@@ -111,14 +111,10 @@ export const FOOTER_ACADEMY = [
 export const INFO_DIALOGS = {
   privacy: {
     title: "Privacy",
-    body: "Our full privacy policy is being finalized. For any question about the information you share with The Signature Affair, or to have your details removed, email Hello@thesignatureaffairga.com or call (678) 913-6712.",
+    body: "Our full privacy policy is being finalized. For any question about the information you share with The Signature Affair, or to have your details removed, email Hello@thesignatureaffairga.com or call (762) 235-4905.",
   },
   terms: {
     title: "Terms",
-    body: "Our full terms are being finalized. For questions about bookings, class enrollment or changes to a date, email Hello@thesignatureaffairga.com or call (678) 913-6712.",
-  },
-  social: {
-    title: "Find us",
-    body: "Follow along on Instagram @thesignaturesffairga. Facebook and TikTok profiles are being finalized and will be linked here as soon as they are live.",
+    body: "Our full terms are being finalized. For questions about bookings, class enrollment or changes to a date, email Hello@thesignatureaffairga.com or call (762) 235-4905.",
   },
 };
