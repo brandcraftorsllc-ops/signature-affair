@@ -13,8 +13,8 @@ export function Hero() {
       <div className="absolute inset-0">
         <div className="saf-hero-img absolute inset-0 h-full w-full [animation-delay:150ms]">
           <Photo
-            src={IMG.ballroom}
-            alt="Designed ballroom with gold chiavari chairs, blush floral centerpieces and candlelight"
+            src={IMG.hero}
+            alt="Candlelit ballroom framed by a gold mirrored arch, with a monogrammed dance floor and ivory florals"
             sizes="100vw"
             priority
           />

@@ -18,9 +18,9 @@ const GLASS = [
 ];
 
 const CATEGORIES = [
-  { title: "Weddings", img: IMG.firstDance, alt: "Couple's first dance under soft reception lighting", delay: 0 },
-  { title: "Corporate Events", img: IMG.corporateGala, alt: "Corporate gala with black and white linens and gold chairs", delay: 110 },
-  { title: "Milestone Celebrations", img: IMG.milestone, alt: "Champagne and gold milestone birthday tablescape", delay: 220 },
+  { title: "Weddings", img: IMG.weddings, alt: "Newlyweds in front of their head table with sparklers", delay: 0 },
+  { title: "Corporate Events", img: IMG.corporate, alt: "Corporate mentorship luncheon with a balloon arch", delay: 110 },
+  { title: "Milestone Celebrations", img: IMG.milestone, alt: "Fiftieth birthday head table with gold chargers and blush napkins", delay: 220 },
 ];
 
 function Inquire() {
@@ -79,7 +79,7 @@ export function Services() {
               className="lit-card group relative block h-full min-h-[420px] overflow-hidden rounded-[28px] border border-copper/30 lg:min-h-[560px]"
             >
               <div className="absolute inset-0 h-full w-full">
-                <Photo src={IMG.flowerWall} alt="Lush blush rose flower wall behind a sweetheart table" sizes="(min-width: 1024px) 58vw, 100vw" />
+                <Photo src={IMG.serviceFeature} alt="Towering red rose and hydrangea centerpiece in a gold vase" sizes="(min-width: 1024px) 58vw, 100vw" />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-signature via-signature/45 to-signature/10" />
               <div className="lit-glow pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-copper/0 group-hover:ring-copper/60" />

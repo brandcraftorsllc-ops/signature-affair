@@ -4,8 +4,8 @@ import { Reveal } from "@/components/ui/Reveal";
 
 const PATHS = [
   {
-    img: IMG.floralArch,
-    alt: "White and blush floral arch with gold-rimmed charger plates and candles",
+    img: IMG.pathEvent,
+    alt: "Candlelit ceremony aisle lined with ivory florals and white chairs",
     overlay: "linear-gradient(180deg, rgba(13,13,15,0.42) 0%, rgba(13,13,15,0.55) 55%, rgba(13,13,15,0.88) 100%)",
     eyebrow: "Planning an event?",
     script: "Let's create magic.",
@@ -13,8 +13,8 @@ const PATHS = [
     cta: "Plan My Event",
   },
   {
-    img: IMG.academyClass,
-    alt: "Small group of women styling a practice tablescape at an event design class",
+    img: IMG.pathAcademy,
+    alt: "Gold charger place setting styled with an ivory napkin and a single rose",
     overlay: "linear-gradient(180deg, rgba(13,17,32,0.5) 0%, rgba(13,13,15,0.55) 55%, rgba(13,13,15,0.88) 100%)",
     eyebrow: "Ready to become a planner?",
     script: "Turn passion into a business.",

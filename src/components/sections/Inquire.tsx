@@ -252,7 +252,7 @@ export function Inquire() {
     <section id="inquire" className="relative overflow-hidden bg-signature">
       <div className="absolute inset-0">
         <div className="absolute inset-0 h-full w-full opacity-55">
-          <Photo src={IMG.flowerWall} alt="Blush rose flower wall behind a sweetheart table" sizes="100vw" />
+          <Photo src={IMG.inquireBackdrop} alt="Ivory flower wall behind a gold sweetheart table" sizes="100vw" />
         </div>
         <div className="absolute inset-0 bg-signature/85" />
         <div className="absolute inset-0 bg-gradient-to-b from-signature via-transparent to-signature/90" />

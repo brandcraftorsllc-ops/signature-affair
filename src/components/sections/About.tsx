@@ -1,4 +1,5 @@
-import { IMG } from "@/lib/content";
+import { IMG, VIDEO } from "@/lib/content";
+import { LoopVideo } from "@/components/ui/LoopVideo";
 import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/ui/Reveal";
 import { CountUp } from "@/components/ui/CountUp";
@@ -8,7 +9,7 @@ export function About() {
     <section id="about" className="relative overflow-hidden bg-signature">
       <div className="absolute inset-0">
         <div className="absolute inset-0 h-full w-full opacity-60">
-          <Photo src={IMG.designerFlorals} alt="Designer arranging florals on a banquet table" sizes="100vw" />
+          <Photo src={IMG.aboutBackdrop} alt="Ivory and gold wedding cake designed for a reception" sizes="100vw" />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-signature via-signature/85 to-signature/35" />
         <div className="absolute inset-0 bg-gradient-to-t from-signature/90 via-transparent to-signature/70" />
@@ -29,6 +30,17 @@ export function About() {
             <span className="absolute -bottom-4 left-4 rounded-full bg-copper px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-signature shadow-[0_18px_40px_-18px_rgba(201,138,94,0.9)]">
               Founder &amp; Lead Designer
             </span>
+            <figure className="absolute -right-2 top-8 w-[92px] overflow-hidden rounded-2xl border border-copper/50 bg-signature shadow-[0_18px_40px_-18px_rgba(201,138,94,0.9)] sm:-right-6 sm:w-[112px]">
+              <LoopVideo
+                src={VIDEO.award.src}
+                poster={VIDEO.award.poster}
+                label="Unboxing a Best of Awards recognition"
+                className="aspect-[9/16] w-full object-cover"
+              />
+              <figcaption className="bg-signature/90 px-2 py-1.5 text-center text-[8.5px] uppercase tracking-[0.18em] text-copper-light">
+                Award-Winning
+              </figcaption>
+            </figure>
           </div>
         </Reveal>
 

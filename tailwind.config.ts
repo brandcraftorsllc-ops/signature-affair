@@ -14,6 +14,8 @@ const config: Config = {
         ink: "#1C1A1A",
         royal: "#0047AB",
       },
+      // 92% is used by the portfolio lightbox backdrop (not in Tailwind's default scale).
+      opacity: { 92: "0.92" },
       fontFamily: {
         display: ["var(--font-bodoni)", "Bodoni Moda", "Times New Roman", "serif"],
         script: ["var(--font-pinyon)", "Pinyon Script", "cursive"],
