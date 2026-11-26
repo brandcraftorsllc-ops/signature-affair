@@ -1,12 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/lib/content";
 import { Logo, Monogram } from "@/components/ui/Logo";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const links = NAV_LINKS.map((l) => ({
+    ...l,
+    to: isHome ? (l.homeHref ?? l.href) : l.href,
+    active: !!l.route && pathname === l.route,
+  }));
 
   useEffect(() => {
     if (!open) return;
@@ -27,25 +36,32 @@ export function Header() {
       <header className="fixed inset-x-0 top-0 z-50">
         <div className="border-b border-copper/30 bg-[rgba(13,13,15,0.55)] backdrop-blur-2xl">
           <div className="mx-auto flex h-[80px] max-w-7xl items-center justify-between gap-6 px-5 sm:h-[88px] sm:px-8">
-            <a href="#top" className="shrink-0" aria-label="The Signature Affair home">
+            <Link href={isHome ? "#top" : "/"} className="shrink-0" aria-label="The Signature Affair home">
               <Logo
                 sizeCls="h-[56px] w-[56px] sm:h-[60px] sm:w-[60px]"
                 nameCls="text-[19px] sm:text-[22px] xl:text-[20px]"
                 tagCls="text-[9.5px] sm:text-[11px] xl:text-[10px]"
                 priority
               />
-            </a>
+            </Link>
 
             <nav className="hidden items-center gap-7 xl:flex" aria-label="Main">
-              {NAV_LINKS.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  className="group relative whitespace-nowrap text-[13.5px] tracking-[0.1em] text-ivory/80 transition-colors hover:text-ivory"
+              {links.map((l) => (
+                <Link
+                  key={l.label}
+                  href={l.to}
+                  aria-current={l.active ? "page" : undefined}
+                  className={`group relative whitespace-nowrap text-[13.5px] tracking-[0.1em] transition-colors hover:text-ivory ${
+                    l.active ? "text-copper-light" : "text-ivory/80"
+                  }`}
                 >
                   {l.label}
-                  <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-copper transition-all duration-500 group-hover:w-full" />
-                </a>
+                  <span
+                    className={`absolute -bottom-1.5 left-0 h-px bg-copper transition-all duration-500 group-hover:w-full ${
+                      l.active ? "w-full" : "w-0"
+                    }`}
+                  />
+                </Link>
               ))}
             </nav>
 
@@ -56,12 +72,12 @@ export function Header() {
               >
                 <span className="relative z-10">Plan My Event</span>
               </a>
-              <a
-                href="#academy"
+              <Link
+                href="/academy"
                 className="btn-shine inline-flex h-11 items-center rounded-full border border-copper/70 px-6 text-[12px] uppercase tracking-[0.18em] text-copper-light transition-all duration-300 hover:-translate-y-0.5 hover:border-copper hover:text-ivory"
               >
                 <span className="relative z-10">Join the Academy</span>
-              </a>
+              </Link>
             </div>
 
             <button
@@ -108,17 +124,20 @@ export function Header() {
             </button>
           </div>
           <nav className="mt-10 flex flex-col" aria-label="Mobile">
-            {NAV_LINKS.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
+            {links.map((l) => (
+              <Link
+                key={l.label}
+                href={l.to}
                 onClick={close}
                 tabIndex={open ? 0 : -1}
-                className="flex min-h-[52px] items-center justify-between border-b border-copper/15 py-3 font-display text-2xl text-ivory"
+                aria-current={l.active ? "page" : undefined}
+                className={`flex min-h-[52px] items-center justify-between border-b py-3 font-display text-2xl ${
+                  l.active ? "border-copper/60 text-copper-light" : "border-copper/15 text-ivory"
+                }`}
               >
                 {l.label}
                 <ArrowUpRight className="h-4 w-4 text-copper" />
-              </a>
+              </Link>
             ))}
           </nav>
           <div className="mt-8 flex flex-col gap-3">
@@ -130,14 +149,14 @@ export function Header() {
             >
               Plan My Event
             </a>
-            <a
-              href="#academy"
+            <Link
+              href="/academy"
               onClick={close}
               tabIndex={open ? 0 : -1}
               className="flex min-h-[50px] items-center justify-center rounded-full border border-copper/60 text-[12px] uppercase tracking-[0.18em] text-copper-light"
             >
               Join the Academy
-            </a>
+            </Link>
           </div>
         </div>
       </div>

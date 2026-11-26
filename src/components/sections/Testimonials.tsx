@@ -1,7 +1,18 @@
 import { TESTIMONIAL_ROWS } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function Testimonials() {
+type Row = (typeof TESTIMONIAL_ROWS)[number];
+
+/** Defaults render the homepage version; inner pages pass only the rows that fit them. */
+export function Testimonials({
+  rows = TESTIMONIAL_ROWS,
+  lead = "What clients",
+  accent = "and students say.",
+}: {
+  rows?: readonly Row[];
+  lead?: string;
+  accent?: string;
+}) {
   return (
     <section className="relative overflow-hidden bg-champagne py-24 lg:py-32">
       <div className="pointer-events-none absolute -left-24 top-1/3 h-80 w-80 rounded-full bg-blush/50 blur-3xl" />
@@ -9,7 +20,7 @@ export function Testimonials() {
         <Reveal className="max-w-2xl">
           <p className="label-caps text-copper-deep">Kind words</p>
           <h2 className="mt-4 font-display text-[clamp(2.1rem,4.6vw,3.5rem)] font-medium leading-[1.08] text-ink">
-            What clients <span className="italic text-copper-deep">and students say.</span>
+            {lead} <span className="italic text-copper-deep">{accent}</span>
           </h2>
           <p className="mt-4 text-[12px] uppercase tracking-[0.14em] text-ink/40">
             Sample testimonials shown until real client and student reviews are provided.
@@ -18,7 +29,7 @@ export function Testimonials() {
       </div>
 
       <div className="relative mt-12 space-y-5">
-        {TESTIMONIAL_ROWS.map((row, r) => (
+        {rows.map((row, r) => (
           <div key={r} className="flex snap-x gap-5 overflow-x-auto px-5 pb-4 sm:px-8 lg:justify-center lg:overflow-visible">
             {row.map((t, i) => (
               <Reveal key={t.quote} delay={i * 100}>

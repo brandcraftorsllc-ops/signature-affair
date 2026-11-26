@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Plane } from "lucide-react";
-import { CONTACT, IMG } from "@/lib/content";
+import { CLASS_OPTIONS, CONTACT, IMG } from "@/lib/content";
+import { INQUIRY_PRESET_EVENT, type InquiryPreset } from "@/lib/inquiry";
 import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/ui/Reveal";
 
-type Tab = "event" | "academy";
+type Tab = InquiryPreset["tab"];
 type Errors = Record<string, string>;
 
 const fieldCls =
@@ -16,7 +17,6 @@ const labelCls = "mb-2 block text-[10.5px] uppercase tracking-[0.18em] text-ivor
 const EVENT_TYPES = ["Wedding", "Corporate", "Birthday", "Shower", "Anniversary", "Other"];
 const BUDGETS = ["Under $3,000", "$3,000 – $6,000", "$6,000 – $12,000", "$12,000 – $25,000", "$25,000+", "Not sure yet"];
 const SERVICES = ["Design & Décor", "Full Planning", "Day-of Coordination"];
-const CLASS_OPTIONS = ["Day-of Coordinator", "Event Planning Business", "Event Design & Décor", "Private Mentorship"];
 const FORMATS = ["In-person", "Virtual"];
 const LEVELS = ["Just starting", "Some experience", "Already planning events"];
 
@@ -56,9 +56,24 @@ function Field({
   );
 }
 
-function Select({ id, name, placeholder, options }: { id: string; name: string; placeholder: string; options: string[] }) {
+function Select({
+  id,
+  name,
+  placeholder,
+  options,
+  value,
+  onChange,
+}: {
+  id: string;
+  name: string;
+  placeholder: string;
+  options: readonly string[];
+  value?: string;
+  onChange?: (v: string) => void;
+}) {
+  const controlled = value !== undefined ? { value, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => onChange?.(e.target.value) } : { defaultValue: "" };
   return (
-    <select id={id} name={name} defaultValue="" className={fieldCls}>
+    <select id={id} name={name} {...controlled} className={fieldCls}>
       <option value="">{placeholder}</option>
       {options.map((o) => (
         <option key={o} value={o}>
@@ -182,9 +197,15 @@ function EventForm() {
   );
 }
 
-function AcademyForm() {
+function AcademyForm({ preset }: { preset: { value: string; n: number } }) {
   const [errors, setErrors] = useState<Errors>({});
   const [done, setDone] = useState(false);
+  const [classChoice, setClassChoice] = useState(preset.value);
+
+  // A "Reserve My Seat" / "Request Mentorship" click elsewhere on the page selects that class.
+  useEffect(() => {
+    if (preset.n > 0) setClassChoice(preset.value);
+  }, [preset]);
 
   return (
     <form
@@ -208,7 +229,14 @@ function AcademyForm() {
           <input id="ac-email" name="email" type="email" autoComplete="email" placeholder="you@email.com" className={fieldCls} />
         </Field>
         <Field id="ac-class" label="Class of interest" error={errors.classChoice}>
-          <Select id="ac-class" name="classChoice" placeholder="Select one" options={CLASS_OPTIONS} />
+          <Select
+            id="ac-class"
+            name="classChoice"
+            placeholder="Select one"
+            options={CLASS_OPTIONS}
+            value={classChoice}
+            onChange={setClassChoice}
+          />
         </Field>
         <Field id="ac-format" label="Preferred format">
           <Select id="ac-format" name="format" placeholder="Select one" options={FORMATS} />
@@ -232,8 +260,19 @@ function AcademyForm() {
   );
 }
 
-export function Inquire() {
-  const [tab, setTab] = useState<Tab>("event");
+export function Inquire({ initialTab = "event" }: { initialTab?: Tab }) {
+  const [tab, setTab] = useState<Tab>(initialTab);
+  const [classPreset, setClassPreset] = useState({ value: "", n: 0 });
+
+  useEffect(() => {
+    const onPreset = (e: Event) => {
+      const { tab: next, classChoice } = (e as CustomEvent<InquiryPreset>).detail;
+      setTab(next);
+      if (classChoice) setClassPreset((p) => ({ value: classChoice, n: p.n + 1 }));
+    };
+    window.addEventListener(INQUIRY_PRESET_EVENT, onPreset);
+    return () => window.removeEventListener(INQUIRY_PRESET_EVENT, onPreset);
+  }, []);
 
   const tabBtn = (t: Tab, label: string) => (
     <button
@@ -278,7 +317,7 @@ export function Inquire() {
               {tabBtn("academy", "Join the Academy")}
             </div>
             <div key={tab} className="mt-8" style={{ animation: "saf-uplight 500ms ease both" }}>
-              {tab === "event" ? <EventForm /> : <AcademyForm />}
+              {tab === "event" ? <EventForm /> : <AcademyForm preset={classPreset} />}
             </div>
           </div>
         </Reveal>

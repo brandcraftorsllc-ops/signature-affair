@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Music2 } from "lucide-react";
 import { CONTACT, FOOTER_ACADEMY, FOOTER_EVENTS, INFO_DIALOGS } from "@/lib/content";
 import { Logo } from "@/components/ui/Logo";
@@ -57,11 +58,11 @@ export function Footer() {
           <div className="md:col-span-2">
             <p className="label-caps text-copper">Events</p>
             <ul className="mt-4 space-y-2.5">
-              {FOOTER_EVENTS.map((t) => (
-                <li key={t}>
-                  <a href="#events" className={linkCls}>
-                    {t}
-                  </a>
+              {FOOTER_EVENTS.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className={linkCls}>
+                    {l.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -70,11 +71,11 @@ export function Footer() {
           <div className="md:col-span-3">
             <p className="label-caps text-copper">Academy</p>
             <ul className="mt-4 space-y-2.5">
-              {FOOTER_ACADEMY.map((t) => (
-                <li key={t}>
-                  <a href="#inquire" className={linkCls}>
-                    {t}
-                  </a>
+              {FOOTER_ACADEMY.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className={linkCls}>
+                    {l.label}
+                  </Link>
                 </li>
               ))}
             </ul>

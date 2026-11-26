@@ -34,14 +34,21 @@ export const CONTACT = {
   tiktok: "https://www.tiktok.com/@thesignatureaffair",
 };
 
-export const NAV_LINKS = [
-  { href: "#top", label: "Home" },
-  { href: "#events", label: "Events" },
-  { href: "#academy", label: "Academy" },
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#about", label: "About Dee" },
-  { href: "#inquire", label: "Contact" },
+/**
+ * `href` is used on inner pages; `homeHref` (when set) is used on the homepage so its
+ * in-page anchors behave exactly as before. `route` marks links that are whole pages
+ * and get the active highlight. Every page has its own #inquire form, so Contact stays local.
+ */
+export const NAV_LINKS: { label: string; href: string; homeHref?: string; route?: string }[] = [
+  { label: "Home", href: "/", homeHref: "#top" },
+  { label: "Events", href: "/events", route: "/events" },
+  { label: "Academy", href: "/academy", route: "/academy" },
+  { label: "Portfolio", href: "/#portfolio", homeHref: "#portfolio" },
+  { label: "About Dee", href: "/#about", homeHref: "#about" },
+  { label: "Contact", href: "#inquire" },
 ];
+
+export const SITE_URL = "https://signature-affair.vercel.app";
 
 export type PortfolioCategory = "Weddings" | "Corporate" | "Celebrations" | "Details";
 
@@ -123,25 +130,69 @@ export const PORTFOLIO: PortfolioItem[] = [
   p("white-flower-wall-candelabras", "White flower wall with gold candelabras and candles", "Weddings", false),
 ];
 
-export const CLASSES = [
+/** Values of the "Class of interest" dropdown in the academy form. */
+export const CLASS_OPTIONS = ["Day-of Coordinator", "Event Planning Business", "Event Design & Décor", "Private Mentorship"] as const;
+export type ClassOption = (typeof CLASS_OPTIONS)[number];
+
+export const CLASSES: {
+  id: string;
+  option: ClassOption;
+  title: string;
+  body: string;
+  note?: string;
+  offset: string;
+  delay: number;
+  learn: string[];
+  who: string;
+}[] = [
   {
+    id: "day-of-coordinator",
+    option: "Day-of Coordinator",
     title: "Day-of Coordinator Class",
     body: "Timelines, vendor coordination and running the day with confidence.",
     note: "Next class dates coming soon",
     offset: "",
     delay: 0,
+    learn: [
+      "Building a detailed day-of timeline",
+      "Confirming and coordinating vendors",
+      "Running rehearsal, ceremony and reception cues",
+      "Staying calm and solving problems on the day",
+      "Wrap-up and send-off",
+    ],
+    who: "Aspiring coordinators and planners who want to run an event day with confidence.",
   },
   {
+    id: "event-planning-business",
+    option: "Event Planning Business",
     title: "Event Planning Business Class",
     body: "Pricing, contracts, clients and building your brand.",
     offset: "sm:translate-x-4",
     delay: 130,
+    learn: [
+      "Pricing your services",
+      "Contracts and putting it in writing",
+      "Finding and serving clients",
+      "Building your brand",
+      "Laying the foundations of your business",
+    ],
+    who: "Planners and creatives ready to turn event work into a business.",
   },
   {
+    id: "event-design-decor",
+    option: "Event Design & Décor",
     title: "Event Design & Décor Class",
     body: "Tablescapes, florals, color and room design, hands-on.",
     offset: "sm:translate-x-8",
     delay: 260,
+    learn: [
+      "Styling tablescapes",
+      "Floral design fundamentals",
+      "Working with color and palettes",
+      "Planning room layout and design",
+      "Hands-on practice with real décor",
+    ],
+    who: "Aspiring designers and décor lovers who learn best by doing.",
   },
 ];
 
@@ -159,19 +210,132 @@ export const TESTIMONIAL_ROWS = [
 ];
 
 export const FOOTER_EVENTS = [
-  "Luxury Event Design & Décor",
-  "Full-Service Planning",
-  "Day-of Coordination",
-  "Weddings",
-  "Corporate Events",
-  "Milestone Celebrations",
+  { label: "Luxury Event Design & Décor", href: "/events#design-decor" },
+  { label: "Full-Service Planning", href: "/events#full-service-planning" },
+  { label: "Day-of Coordination", href: "/events#day-of-coordination" },
+  { label: "Weddings", href: "/events#weddings" },
+  { label: "Corporate Events", href: "/events#corporate-events" },
+  { label: "Milestone Celebrations", href: "/events#milestone-celebrations" },
 ];
 
 export const FOOTER_ACADEMY = [
-  "Day-of Coordinator Class",
-  "Event Planning Business Class",
-  "Event Design & Décor Class",
-  "Private Mentorship",
+  { label: "Day-of Coordinator Class", href: "/academy#day-of-coordinator" },
+  { label: "Event Planning Business Class", href: "/academy#event-planning-business" },
+  { label: "Event Design & Décor Class", href: "/academy#event-design-decor" },
+  { label: "Private Mentorship", href: "/academy#private-mentorship" },
+];
+
+/* ---------- Events page ---------- */
+
+export const EVENT_TYPES = [
+  {
+    id: "weddings",
+    title: "Weddings",
+    img: IMG.weddings,
+    alt: "Newlyweds in front of their head table with sparklers",
+    body: "From the ceremony aisle to the last dance, every detail designed and coordinated around your story.",
+    tags: ["Ceremony & reception design", "Florals & tablescapes", "Vendor coordination", "Day-of timeline"],
+  },
+  {
+    id: "corporate-events",
+    title: "Corporate Events",
+    img: IMG.corporate,
+    alt: "Corporate mentorship luncheon with a balloon arch",
+    body: "Galas, luncheons and leadership dinners that run to the minute, so you can host your guests instead of managing the room.",
+    tags: ["Galas & luncheons", "Branded décor", "Staging & lounges", "Run-of-show timing"],
+  },
+  {
+    id: "milestone-celebrations",
+    title: "Milestone Celebrations",
+    img: IMG.milestone,
+    alt: "Fiftieth birthday head table with gold chargers and blush napkins",
+    body: "Birthdays, anniversaries, showers and sweet sixteens designed to feel personal, never pulled from a template.",
+    tags: ["Backdrops & balloon design", "Head & dessert tables", "Themed décor", "Full setup"],
+  },
+];
+
+/** The three homepage service offerings, with what each covers. */
+export const EVENT_SERVICES = [
+  {
+    id: "design-decor",
+    eyebrow: "Signature offering",
+    title: "Luxury Event Design & Décor",
+    body: "Florals, tablescapes, draping and full room transformations, designed around the way you want your guests to feel.",
+    covers: ["Florals", "Tablescapes", "Draping", "Full room transformations"],
+  },
+  {
+    id: "full-service-planning",
+    title: "Full-Service Planning",
+    body: "Every detail handled from start to finish.",
+    covers: ["Budget", "Vendors", "Timeline", "Design"],
+  },
+  {
+    id: "day-of-coordination",
+    title: "Day-of Coordination",
+    body: "You enjoy the day. We run the timeline.",
+    covers: ["Rehearsal", "Vendor coordination", "Timeline management", "Through to send-off"],
+  },
+];
+
+export const EVENT_STEPS = [
+  { title: "Inquire", body: "Share your date, guest count and vision through the form below or by phone." },
+  { title: "Consultation", body: "We talk through your priorities, style and budget, and shape the plan together." },
+  { title: "Design & Planning", body: "Design, vendors and a detailed timeline come together, one decision at a time." },
+  { title: "Event Day", body: "We run the timeline and every detail, so you can be fully present." },
+];
+
+/* ---------- Academy page ---------- */
+
+export const ACADEMY_FORMATS = ["In-Person Hands-On", "Virtual", "One-on-One Mentorship"];
+
+export const ACADEMY_VALUES = [
+  {
+    icon: "experience",
+    title: "Real-world experience",
+    body: "Learn from a working designer with more than 15 years of weddings, corporate events and celebrations.",
+  },
+  {
+    icon: "hands-on",
+    title: "Hands-on practice",
+    body: "Style, plan and problem-solve with your own hands, not just slides.",
+  },
+  {
+    icon: "feedback",
+    title: "Personal feedback",
+    body: "Honest, specific feedback on your work, so you know exactly what to improve.",
+  },
+  {
+    icon: "business",
+    title: "Business-building guidance",
+    body: "Pricing, contracts and client guidance to help you build something that lasts.",
+  },
+] as const;
+
+export const ACADEMY_FAQ = [
+  {
+    q: "Who are the classes for?",
+    a: "Aspiring day-of coordinators, event planners and designers, whether you are just starting out or already planning events.",
+  },
+  {
+    q: "What is the difference between in-person and virtual classes?",
+    a: "In-person classes are hands-on in Georgia. Virtual classes are taught live online. Contact us for details on schedules and what each format includes.",
+  },
+  {
+    q: "What should I bring?",
+    a: "We will share what to bring when you reserve your seat. Contact us for details.",
+  },
+  {
+    q: "How large are the classes?",
+    a: "Class sizes vary by class and format. Contact us for details.",
+  },
+  {
+    q: "Do I receive a certificate?",
+    a: "Contact us for details.",
+  },
+  {
+    q: "How do I reserve my seat?",
+    a: "Use the reservation form on this page, call (762) 235-4905 or email Hello@thesignatureaffairga.com. Inquire for upcoming dates.",
+  },
 ];
 
 export const INFO_DIALOGS = {

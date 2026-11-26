@@ -1,6 +1,4 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
+import { SiteShell } from "@/components/layout/SiteShell";
 import { Hero } from "@/components/sections/Hero";
 import { Paths } from "@/components/sections/Paths";
 import { Services } from "@/components/sections/Services";
@@ -13,21 +11,16 @@ import { Inquire } from "@/components/sections/Inquire";
 
 export default function HomePage() {
   return (
-    <div className="bg-signature">
-      <Header />
-      <main>
-        <Hero />
-        <Paths />
-        <Services />
-        <Portfolio />
-        <Academy />
-        <About />
-        <SignatureStatement />
-        <Testimonials />
-        <Inquire />
-      </main>
-      <Footer />
-      <MobileCtaBar />
-    </div>
+    <SiteShell>
+      <Hero />
+      <Paths />
+      <Services />
+      <Portfolio />
+      <Academy />
+      <About />
+      <SignatureStatement />
+      <Testimonials />
+      <Inquire />
+    </SiteShell>
   );
 }

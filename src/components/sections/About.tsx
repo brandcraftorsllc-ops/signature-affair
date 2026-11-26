@@ -4,9 +4,18 @@ import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/ui/Reveal";
 import { CountUp } from "@/components/ui/CountUp";
 
-export function About() {
+/** Defaults render the homepage version; the Academy page reuses it as "Meet your instructor". */
+export function About({
+  id = "about",
+  eyebrow,
+  cta = { label: "Work with Dee", href: "#inquire" },
+}: {
+  id?: string;
+  eyebrow?: string;
+  cta?: { label: string; href: string };
+}) {
   return (
-    <section id="about" className="relative overflow-hidden bg-signature">
+    <section id={id} className="relative overflow-hidden bg-signature">
       <div className="absolute inset-0">
         <div className="absolute inset-0 h-full w-full opacity-60">
           <Photo src={IMG.aboutBackdrop} alt="Ivory and gold wedding cake designed for a reception" sizes="100vw" />
@@ -46,6 +55,7 @@ export function About() {
 
         <Reveal delay={120} className="lg:col-span-7">
           <div className="glass-dark rounded-[28px] p-7 sm:p-11">
+            {eyebrow && <p className="label-caps mb-3 text-copper">{eyebrow}</p>}
             <p className="font-script text-[28px] text-copper-light">hello, I&apos;m</p>
             <h2 className="mt-1 font-display text-[clamp(2.2rem,4.4vw,3.4rem)] font-medium leading-[1.05] text-ivory">
               Dee
@@ -74,10 +84,10 @@ export function About() {
               </div>
             </div>
             <a
-              href="#inquire"
+              href={cta.href}
               className="btn-shine mt-9 inline-flex min-h-[52px] items-center justify-center rounded-full bg-copper px-9 text-[11.5px] uppercase tracking-[0.2em] text-signature transition-transform duration-300 hover:-translate-y-0.5"
             >
-              <span className="relative z-10">Work with Dee</span>
+              <span className="relative z-10">{cta.label}</span>
             </a>
           </div>
         </Reveal>

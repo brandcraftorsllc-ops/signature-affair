@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { IMG } from "@/lib/content";
 import { Photo } from "@/components/ui/Photo";
 
@@ -76,12 +77,12 @@ export function Hero() {
             >
               <span className="relative z-10">Plan My Event</span>
             </a>
-            <a
-              href="#academy"
+            <Link
+              href="/academy"
               className="btn-shine inline-flex min-h-[52px] items-center justify-center rounded-full border border-copper/70 px-9 text-[12px] uppercase tracking-[0.2em] text-copper-light transition-all duration-300 hover:-translate-y-0.5 hover:border-copper hover:text-ivory"
             >
               <span className="relative z-10">Join the Academy</span>
-            </a>
+            </Link>
           </div>
           <div
             className="saf-rise mt-11 flex flex-wrap items-center gap-x-3 gap-y-2 text-copper"
